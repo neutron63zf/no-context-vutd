@@ -1,1 +1,1 @@
-web: npm start --unhandled-rejections=strict
+worker: npm start --unhandled-rejections=strict
