@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const BOT_TOKEN = 'shhh, its a seekrit';
+const BOT_TOKEN = process.env.BOT_TOKEN;
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
