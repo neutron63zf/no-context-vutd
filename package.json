@@ -1,0 +1,24 @@
+{
+  "name": "no-context-vutd",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "discord.js": "^12.5.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/futaiwata/no-context-vutd.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/futaiwata/no-context-vutd/issues"
+  },
+  "homepage": "https://github.com/futaiwata/no-context-vutd#readme"
+}
