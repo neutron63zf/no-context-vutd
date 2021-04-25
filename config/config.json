@@ -8,9 +8,17 @@
     "operatorsAliases": false
   },
   "test": {
+    "dialect": "postgres",
+    "dialectOptions": {
+        "ssl": true
+    },
     "use_env_variable": "DATABASE_URL"
   },
   "production": {
+    "dialect": "postgres",
+    "dialectOptions": {
+        "ssl": true
+    },
     "use_env_variable": "DATABASE_URL"
   }
 }
