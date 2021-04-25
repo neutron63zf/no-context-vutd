@@ -20,28 +20,37 @@ app.listen(3000, () => console.log("Example app listening on port 3000!"));
 dclient.on('ready', () => console.log(`Logged in as ${dclient.user.tag}!`));
 
 dclient.on('message', msg => {
-  if (msg.channel.name == 'no-context-vutd') {
-    if (msg.deleted){
-      db.data.findOne({
-        where: { url: msg.url }
-      }).then(item => {
-        item.destroy();
-      });
-    }else{
-      db.data.findOrCreate({
-        where: { url: msg.url },
-        defaults: {
-          url: msg.url,
-          content: msg.edits[-1],
-          isnew: true
-        }
-      }).then(([item, created]) => {
-        if(!created) {
-          item.content = msg.edits[-1];
-          item.save();
-        }
-      });
-    }
+  if (msg.channel.name == '空き地-単語登録など') {
+    db.data.create({
+      url: msg.url,
+      content: msg.content,
+      isnew: true
+    });
+  }
+});
+
+dclient.on('messageUpdate', (oldMsg, newMsg) => {
+  if (newMsg.channel.name == '空き地-単語登録など') {
+    db.data.findOne({
+      where: {
+        url: oldMsg.url
+      }
+    }).then(item => {
+      item.content = newMsg.content;
+      item.save();
+    });
+  }
+});
+
+dclient.on('messageDelete', msg => {
+  if (msg.channel.name == '空き地-単語登録など') {
+    db.data.findOne({
+      where: {
+        url: msg.url
+      }
+    }).then(item => {
+      item.destroy();
+    });
   }
 });
 
