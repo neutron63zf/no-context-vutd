@@ -4,6 +4,7 @@ require('dotenv').config();
 
 const dclient = new Discord.Client();
 const BOT_TOKEN = process.env.BOT_TOKEN;
+const port = process.env.PORT || 3000
 
 const express = require("express");
 const app = express();
@@ -15,7 +16,7 @@ app.get("/", function (req, res) {
   });
 });
 
-app.listen(3000, () => console.log("Example app listening on port 3000!"));
+app.listen(port, () => console.log("Example app listening on port 3000!"));
 
 dclient.on('ready', () => console.log(`Logged in as ${dclient.user.tag}!`));
 
