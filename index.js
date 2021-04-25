@@ -4,10 +4,12 @@ require('dotenv').config();
 
 const dclient = new Discord.Client();
 const BOT_TOKEN = process.env.BOT_TOKEN;
-const port = process.env.PORT || 3000
+const cid = process.env.CHANNEL_ID;
 
 const express = require("express");
 const app = express();
+const port = process.env.PORT || 3000
+
 const db = require("./models/index");
 
 app.get("/", function (req, res) {
@@ -21,7 +23,7 @@ app.listen(port, () => console.log("Example app listening on port 3000!"));
 dclient.on('ready', () => console.log(`Logged in as ${dclient.user.tag}!`));
 
 dclient.on('message', msg => {
-  if (msg.channel.name == '空き地-単語登録など') {
+  if (msg.channel.id == cid) {
     db.data.create({
       url: msg.url,
       content: msg.content,
@@ -31,7 +33,7 @@ dclient.on('message', msg => {
 });
 
 dclient.on('messageUpdate', (oldMsg, newMsg) => {
-  if (newMsg.channel.name == '空き地-単語登録など') {
+  if (newMsg.channel.id == cid) {
     db.data.findOne({
       where: {
         url: oldMsg.url
@@ -44,7 +46,7 @@ dclient.on('messageUpdate', (oldMsg, newMsg) => {
 });
 
 dclient.on('messageDelete', msg => {
-  if (msg.channel.name == '空き地-単語登録など') {
+  if (msg.channel.id == cid) {
     db.data.findOne({
       where: {
         url: msg.url
