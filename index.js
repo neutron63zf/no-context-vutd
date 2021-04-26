@@ -100,13 +100,20 @@ dclient.on('message', msg => {
 
 dclient.on('messageUpdate', (oldMsg, newMsg) => {
   if (newMsg.channel.id == cid) {
-    db.data.findOne({
+    db.data.findOrCreate({
       where: {
         url: oldMsg.url
+      },
+      default: {
+        url: nerMsg.url,
+        content: newMsg.content,
+        isnew: true
       }
-    }).then(item => {
-      item.content = newMsg.content;
-      item.save();
+    }).then(([item, created]) => {
+      if (!created) {
+        item.content = newMsg.content;
+        item.save();
+      }
     });
   }
 });
