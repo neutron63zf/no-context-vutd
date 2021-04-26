@@ -39,6 +39,7 @@ app.get("/tweet", function(req, res) {
       res.send(tweet());
     }catch(error){
       res.send(error);
+      console.log(error);
     }
   }else{
     res.send('password incorrect');
