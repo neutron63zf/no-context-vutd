@@ -13,18 +13,16 @@ const port = process.env.PORT || 3000
 
 const db = require("./models/index");
 
-var passport = require('passport');
-var TwitterStrategy = require('passport-twitter').Strategy;
+const passport = require('passport');
+const session = require("express-session"),
+const bodyParser = require("body-parser");
+const TwitterStrategy = require('passport-twitter').Strategy;
 
-app.configure(function() {
-  app.use(express.static('public'));
-  app.use(express.cookieParser());
-  app.use(express.bodyParser());
-  app.use(express.session({ secret: 'fzB4RbsWbauqaXV' }));
-  app.use(passport.initialize());
-  app.use(passport.session());
-  app.use(app.router);
-});
+app.use(express.static("public"));
+app.use(session({ secret: "cats" }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 passport.use(new TwitterStrategy({
   consumerKey: tck,
