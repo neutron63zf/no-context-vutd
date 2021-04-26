@@ -9,7 +9,7 @@ const cid = process.env.CHANNEL_ID;
 const tck = process.env.TWITTER_CONSUMER_KEY;
 const tcs = process.env.TWITTER_CONSUMER_SECRET;
 const tat  = process.env.TWITTER_ACCESS_TOKEN;
-const tts = process.env.TWOTTER_TOKEN_SECRET;
+const tts = process.env.TWITTER_TOKEN_SECRET;
 
 const express = require("express");
 const app = express();
