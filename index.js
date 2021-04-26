@@ -114,7 +114,7 @@ dclient.on('messageUpdate', (oldMsg, newMsg) => {
         where: {
           url: oldMsg.url
         },
-        default: {
+        defaults: {
           url: newMsg.url,
           content: newMsg.content,
           isnew: true
