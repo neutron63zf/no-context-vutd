@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const path = require('path')
+const Cron = require('cron');
 require('dotenv').config();
 
 const dclient = new Discord.Client();
@@ -33,6 +33,14 @@ app.get("/", function (req, res) {
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+
+new Cron.CronJob({
+  cronTime: '0 0 * * * *',
+  onTick: function () {
+    tweet();
+  },
+  start: true
+});
 
 function tweet(){
   db.data.findAll({}).then((e) => {
