@@ -33,7 +33,7 @@ app.get("/", function (req, res) {
   });
 });
 
-app.post("/tweet", function(req, res) {
+app.get("/tweet", function(req, res) {
   if (req.query.pass == itp) {
     try{
       res.send(tweet());
