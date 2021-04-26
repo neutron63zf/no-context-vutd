@@ -18,7 +18,7 @@ app.get("/", function (req, res) {
   });
 });
 
-app.listen(port, () => console.log("Example app listening on port 3000!"));
+app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
 dclient.on('ready', () => console.log(`Logged in as ${dclient.user.tag}!`));
 
