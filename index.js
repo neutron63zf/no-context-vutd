@@ -90,6 +90,7 @@ dclient.on('ready', () => console.log(`Logged in as ${dclient.user.tag}!`));
 
 dclient.on('message', msg => {
   if (msg.channel.id == cid) {
+    if (msg.mentions.has(user)) return;
     db.data.create({
       url: msg.url,
       content: msg.content,
@@ -100,6 +101,15 @@ dclient.on('message', msg => {
 
 dclient.on('messageUpdate', (oldMsg, newMsg) => {
   if (newMsg.channel.id == cid) {
+    if (newMsg.mentions.has(user)) {
+      db.data.findOne({
+        where: {
+          url: oldMsg.url
+        }
+      }).then(item => {
+        item.destroy();
+      });
+    };
     db.data.findOrCreate({
       where: {
         url: oldMsg.url
@@ -115,7 +125,7 @@ dclient.on('messageUpdate', (oldMsg, newMsg) => {
         item.save();
       }
     });
-  }
+  };
 });
 
 dclient.on('messageDelete', msg => {
@@ -127,7 +137,7 @@ dclient.on('messageDelete', msg => {
     }).then(item => {
       item.destroy();
     });
-  }
+  };
 });
 
 dclient.login(BOT_TOKEN);
