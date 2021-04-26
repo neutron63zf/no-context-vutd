@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const Twit = require('twit');v
+const Twit = require('twit');
 const Cron = require('cron');
 require('dotenv').config();
 
