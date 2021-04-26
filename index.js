@@ -28,6 +28,10 @@ const T = new Twit({
 })
 
 app.get("/", function (req, res) {
+  res.send(new Date());
+});
+
+app.get("/list", function (req, res) {
   db.data.findAll({}).then((e) => {
     res.send(e);
   });
@@ -46,7 +50,7 @@ app.get("/tweet", function(req, res) {
   };
 });
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(port, () => console.log(`no-context-vutd app listening on port ${port}!`));
 
 new Cron.CronJob({
   cronTime: '0 0 * * * *',
