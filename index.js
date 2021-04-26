@@ -57,24 +57,30 @@ new Cron.CronJob({
 });
 
 function tweet(){
-  db.data.findAll({}).then((e) => {
-    var dic = JSON.parse(e);
-    var news = [];
-    for (var i of dic){
-      if (i.isnew) {
-        news += i;
-      }
-    };
-    if (news == []) {
-      var no = Math.floor(Math.random()*length(dic));
-      var message = dic[no].content;
+  db.data.count({
+    where: {isnew: true}
+  }).then(e => {
+    if (e > 0) {
+      db.data.findAll({
+        where: {isnew: true}
+      }).then(records => {
+        var n = Math.floor(Math.random() * records.length);
+        records[n].isnew = false;
+        records[n].save();
+        T.post('statuses/update', {
+          status: records[n].content.replace(/<.+?>/g, '')
+        });
+        console.log(message)
+      });
     }else{
-      var no = Math.floor(Math.random()*length(news));
-      var message = news[no].content;
+      db.data.findAll({}).then(records => {
+        var n = Math.floor(Math.random() * records.length);
+        T.post('statuses/update', {
+          status: records[n].content.replace(/<.+?>/g, '')
+        });
+        console.log(message)
+      });
     }
-
-    T.post('statuses/update', { status: message.replace(/<.+?>/g, '') });
-    return message;
   });
 }
 
