@@ -14,12 +14,12 @@ const port = process.env.PORT || 3000
 const db = require("./models/index");
 
 const passport = require('passport');
-const session = require("express-session"),
-const bodyParser = require("body-parser");
+var session = require("express-session"),
+    bodyParser = require("body-parser");
 const TwitterStrategy = require('passport-twitter').Strategy;
 
 app.use(express.static("public"));
-app.use(session({ secret: "cats" }));
+app.use(session({ secret: "gixqqWKkrpVkkn6" }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
