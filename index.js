@@ -70,7 +70,6 @@ function tweet(){
         T.post('statuses/update', {
           status: records[n].content.replace(/<.+?>/g, '')
         });
-        console.log(message)
       });
     }else{
       db.data.findAll({}).then(records => {
@@ -78,7 +77,6 @@ function tweet(){
         T.post('statuses/update', {
           status: records[n].content.replace(/<.+?>/g, '')
         });
-        console.log(message)
       });
     }
   });
