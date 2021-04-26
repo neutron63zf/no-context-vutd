@@ -15,6 +15,7 @@ const app = express();
 const port = process.env.PORT || 3000
 
 const db = require("./models/index");
+const { randomInt } = require('crypto');
 
 const T = new Twit({
   consumer_key: tck,
@@ -32,6 +33,28 @@ app.get("/", function (req, res) {
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+
+function tweet(){
+  db.data.findAll({}).then((e) => {
+    var dic = JSON.parse(e);
+    var news = [];
+    for (var i of dic){
+      if (i.isnew) {
+        news += i;
+      }
+    };
+    if (news == []) {
+      var no = Math.floor(Math.random()*length(dic));
+      var message = dic[no].content;
+    }else{
+      var no = Math.floor(Math.random()*length(news));
+      var message = news[no].content;
+    }
+
+    T.post('statuses/update', { status: message.replace(/<.+?>/g, '') }, function(err, data, response) {
+    });
+  });
+}
 
 dclient.on('ready', () => console.log(`Logged in as ${dclient.user.tag}!`));
 
