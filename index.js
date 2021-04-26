@@ -15,8 +15,11 @@ const db = require("./models/index");
 
 var passport = require('passport');
 var TwitterStrategy = require('passport-twitter').Strategy;
+<<<<<<< HEAD
 app.use(passport.initialize());
 app.use(passport.session());
+=======
+>>>>>>> origin/passport-twitter
 
 passport.use(new TwitterStrategy({
   consumerKey: tck,
