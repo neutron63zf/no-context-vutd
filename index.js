@@ -115,7 +115,7 @@ dclient.on('messageUpdate', (oldMsg, newMsg) => {
         url: oldMsg.url
       },
       default: {
-        url: nerMsg.url,
+        url: newMsg.url,
         content: newMsg.content,
         isnew: true
       }
