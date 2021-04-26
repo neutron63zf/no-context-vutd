@@ -121,7 +121,6 @@ dclient.on('messageUpdate', (oldMsg, newMsg) => {
         }
       }).then(([item, created]) => {
         item.content = newMsg.content;
-        item
         item.save();
       });
     }
