@@ -20,7 +20,7 @@ app.use(passport.initialize());
 passport.use(new TwitterStrategy({
   consumerKey: tck,
   consumerSecret: tcs,
-  callbackURL: 'http://no-context-vutd.herokuapp.com:' + port + '/auth/twitter/callback'
+  callbackURL: 'http://no-context-vutd.herokuapp.com/auth/twitter/callback'
 },
 function(token, tokenSecret, profile, done) {
   console.log(token)
