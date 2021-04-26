@@ -90,7 +90,7 @@ dclient.on('ready', () => console.log(`Logged in as ${dclient.user.tag}!`));
 
 dclient.on('message', msg => {
   if (msg.channel.id == cid) {
-    if (msg.mentions.has(user)) return;
+    if (msg.content.slice(0, 1) == '.') return;
     db.data.create({
       url: msg.url,
       content: msg.content,
@@ -101,7 +101,7 @@ dclient.on('message', msg => {
 
 dclient.on('messageUpdate', (oldMsg, newMsg) => {
   if (newMsg.channel.id == cid) {
-    if (newMsg.mentions.has(user)) {
+    if (newMsg.content.slice(0, 1) == '.') {
       db.data.findOne({
         where: {
           url: oldMsg.url
