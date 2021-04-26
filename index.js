@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const Twit = require('twit');v
 const Cron = require('cron');
 require('dotenv').config();
 
@@ -15,7 +16,6 @@ const app = express();
 const port = process.env.PORT || 3000
 
 const db = require("./models/index");
-const { randomInt } = require('crypto');
 
 const T = new Twit({
   consumer_key: tck,
