@@ -131,6 +131,7 @@ dclient.on('messageUpdate', (oldMsg, newMsg) => {
 
 dclient.on('messageDelete', msg => {
   if (msg.channel.id == cid) {
+    if (msg.content.slice(0, 1) == '.') return;
     db.data.findOne({
       where: {
         url: msg.url
