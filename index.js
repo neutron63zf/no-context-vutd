@@ -10,6 +10,7 @@ const tck = process.env.TWITTER_CONSUMER_KEY;
 const tcs = process.env.TWITTER_CONSUMER_SECRET;
 const tat  = process.env.TWITTER_ACCESS_TOKEN;
 const tts = process.env.TWITTER_TOKEN_SECRET;
+const itp = process.env.IMMEDIATE_TWEET_PASSWORD;
 
 const express = require("express");
 const app = express();
@@ -30,6 +31,18 @@ app.get("/", function (req, res) {
   db.data.findAll({}).then((e) => {
     res.send(e);
   });
+});
+
+app.post("/tweet", function(req, res) {
+  if (req.query.pass == itp) {
+    try{
+      res.send(tweet());
+    }catch(error){
+      res.send(error);
+    }
+  }else{
+    res.send('password incorrect');
+  };
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
@@ -59,8 +72,8 @@ function tweet(){
       var message = news[no].content;
     }
 
-    T.post('statuses/update', { status: message.replace(/<.+?>/g, '') }, function(err, data, response) {
-    });
+    T.post('statuses/update', { status: message.replace(/<.+?>/g, '') });
+    return message;
   });
 }
 
