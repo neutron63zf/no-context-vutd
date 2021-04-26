@@ -14,7 +14,7 @@ const port = process.env.PORT || 3000
 const db = require("./models/index");
 
 var passport = require('passport');
-var TwitterStrategy = require('passport-twitter');
+var TwitterStrategy = require('passport-twitter').Strategy;
 app.use(passport.initialize());
 
 passport.use(new TwitterStrategy({
