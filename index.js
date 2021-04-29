@@ -53,13 +53,13 @@ app.get("/tweet", function(req, res) {
 
 app.listen(port, () => console.log(`no-context-vutd app listening on port ${port}!`));
 
-new Cron.CronJob({
-  cronTime: '0 0 * * * *',
-  onTick: function () {
-    tweet();
-  },
-  start: true
-});
+//new Cron.CronJob({
+//  cronTime: '0 0 * * * *',
+//  onTick: function () {
+//    tweet();
+//  },
+//  start: true
+//});
 
 function tweet(){
   db.data.count({
@@ -145,4 +145,4 @@ dclient.on('messageDelete', msg => {
   };
 });
 
-dclient.login(BOT_TOKEN);
+//dclient.login(BOT_TOKEN);
