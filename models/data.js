@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   data.init({
     url: DataTypes.STRING,
     content: DataTypes.STRING,
-    isnew: DataTypes.BOOLEAN
+    group: DataTypes.INT4
   }, {
     sequelize,
     modelName: 'data',
