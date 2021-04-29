@@ -33,6 +33,7 @@ app.get("/", function (req, res) {
 
 app.get("/list", function (req, res) {
   db.data.findAll({}).then((e) => {
+    res.set('Content-Type', 'application/json');
     res.send(e);
   });
 });
