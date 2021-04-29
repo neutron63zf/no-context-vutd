@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   data.init({
     url: DataTypes.STRING,
     content: DataTypes.STRING,
-    group: DataTypes.INT4
+    group: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'data',

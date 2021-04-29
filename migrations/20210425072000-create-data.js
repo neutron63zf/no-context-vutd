@@ -14,9 +14,6 @@ module.exports = {
       content: {
         type: Sequelize.STRING
       },
-      isnew: {
-        type: Sequelize.BOOLEAN
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -24,6 +21,9 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      group: {
+        type: Sequelize.INTEGER
       }
     });
   },
