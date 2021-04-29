@@ -28,7 +28,7 @@ const T = new Twit({
 })
 
 app.get("/", function (req, res) {
-  res.send(new Date());
+  res.sendFile(__dirname + "/index.html");
 });
 
 app.get("/list", function (req, res) {

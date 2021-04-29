@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>No Context VUTD</title>
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    </head>
+<body>
+    <section>
+        <table border="p">
+            <tr>
+                <th>id</th>
+                <th>link</th>
+                <th>content</th>
+                <th>group</th>
+            </tr>
+        </table>
+    </section>
+
+    <script>
+        const table = $("table");
+        let tr;
+        let id;
+        $.getJSON("/list", function(res) {
+            console.log(res);
+            for (var i=0; i < res.length; i++) {
+                row = res[i];
+                console.log(row.id.toString());
+                id = row.id.toString();
+                tr = $('<tr id="' + id + '"></tr>').appendTo(table);
+                $('<td>' + id + '</td>').appendTo(tr);
+                $('<td> <a href="' + row.url + '"> リンク </td>').appendTo(tr);
+                $('<td>' + row.content + '</td>').appendTo(tr);
+                $('<td>' + row.group + '</td>').appendTo(tr);
+            };
+        });
+    </script>
+</body>
+</html>
