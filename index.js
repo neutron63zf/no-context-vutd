@@ -62,21 +62,23 @@ new Cron.CronJob({
 
 function tweet(){
   db.data.count({
-    where: {isnew: true}
+    where: {group: -1}
   }).then(e => {
     if (e > 0) {
       db.data.findAll({
-        where: {isnew: true}
+        where: {group: -1}
       }).then(records => {
         var n = Math.floor(Math.random() * records.length);
-        records[n].isnew = false;
+        records[n].group = records[n].id % 4;
         records[n].save();
         T.post('statuses/update', {
           status: records[n].content.replace(/<.+?>/g, '')
         });
       });
     }else{
-      db.data.findAll({}).then(records => {
+      db.data.findAll({
+        where:{ group: (new Date().getHours()) % 4 }
+      }).then(records => {
         var n = Math.floor(Math.random() * records.length);
         T.post('statuses/update', {
           status: records[n].content.replace(/<.+?>/g, '')
@@ -94,7 +96,7 @@ dclient.on('message', msg => {
     db.data.create({
       url: msg.url,
       content: msg.content,
-      isnew: true
+      group: -1
     });
   }
 });
@@ -117,7 +119,7 @@ dclient.on('messageUpdate', (oldMsg, newMsg) => {
         defaults: {
           url: newMsg.url,
           content: newMsg.content,
-          isnew: true
+          group: -1
         }
       }).then(([item, created]) => {
         if (!created) {
