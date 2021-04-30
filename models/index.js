@@ -12,7 +12,7 @@ const db = {
   data: require('./data')(sequelize, Sequelize)
 }
 
-Object.entries(db).forEach(([modelName, model]) => {
+Object.values(db).forEach(model => {
   if (model.associate) {
     model.associate(db)
   }
